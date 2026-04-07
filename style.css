@@ -1,0 +1,625 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Notion color palette */
+  --bg: #FFFFFF;
+  --bg-secondary: #F7F7F5;
+  --surface: #FFFFFF;
+  --text-primary: #37352F;
+  --text-secondary: #6B6862;
+  --text-tertiary: #9B9A97;
+  --border: #E9E9E7;
+  --border-light: #F1F1EF;
+  --hover-bg: #EFEFEC;
+  --accent: #2383E2;
+  --accent-hover: #1A6FC4;
+  --accent-light: rgba(35, 131, 226, 0.1);
+  --sidebar-bg: #F7F7F5;
+  --sidebar-width: 240px;
+  --radius: 4px;
+  --radius-sm: 3px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
+  --transition: 0.1s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ─── Sidebar ──────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 8px 0 16px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition);
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.workspace-avatar {
+  width: 24px;
+  height: 24px;
+  background: var(--text-primary);
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.nav-section {
+  padding: 0;
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  padding: 6px 12px 2px;
+  margin: 8px 0 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background var(--transition);
+  color: var(--text-secondary);
+  font-weight: 400;
+  font-size: 14px;
+  position: relative;
+  margin: 0 4px;
+  user-select: none;
+}
+
+.nav-item:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* No left bar indicator — Notion-style */
+.nav-item.active::before {
+  display: none;
+}
+
+.nav-item svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.nav-item.active svg {
+  opacity: 0.8;
+}
+
+.nav-count {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  background: rgba(55, 53, 47, 0.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.nav-item.active .nav-count {
+  color: var(--text-secondary);
+}
+
+/* ─── Main Content ─────────────────────────────────── */
+.main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 60px 96px 40px;
+  max-width: calc(var(--sidebar-width) + 720px);
+}
+
+.page-header {
+  margin-bottom: 36px;
+}
+
+.page-emoji {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+/* ─── Divider ──────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ─── Task Input ───────────────────────────────────── */
+.task-input-wrapper {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: border-color var(--transition);
+}
+
+.task-input-wrapper:focus-within {
+  border-color: var(--text-tertiary);
+}
+
+.task-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+/* Notion-style "+" prefix */
+.input-plus {
+  width: 18px;
+  height: 18px;
+  border: 1.5px dashed var(--text-tertiary);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.task-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: transparent;
+  font-weight: 400;
+}
+
+.task-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background var(--transition), opacity var(--transition);
+  opacity: 0;
+}
+
+.task-input-wrapper:focus-within .add-btn {
+  opacity: 1;
+}
+
+.add-btn:hover {
+  background: var(--accent-hover);
+}
+
+.add-btn:active {
+  opacity: 0.8;
+}
+
+.add-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Filters ──────────────────────────────────────── */
+.filters {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+  padding: 2px;
+  background: var(--hover-bg);
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.filter-btn {
+  padding: 5px 12px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover {
+  color: var(--text-secondary);
+}
+
+.filter-btn.active {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+/* ─── Task List ────────────────────────────────────── */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 6px;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  transition: background var(--transition);
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-item:hover {
+  background: var(--hover-bg);
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.task-item.completed {
+  opacity: 0.55;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.task-item.removing {
+  animation: fadeOut 0.2s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+
+/* ─── Notion-style Checkbox ────────────────────────── */
+.checkbox-wrapper {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.checkbox-wrapper input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.checkbox-custom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--text-tertiary);
+  border-radius: 3px;               /* Square-ish like Notion */
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.checkbox-custom svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all var(--transition);
+  color: white;
+  stroke-width: 3;
+}
+
+.checkbox-wrapper input:checked + .checkbox-custom {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.checkbox-wrapper input:checked + .checkbox-custom svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkbox-wrapper input:focus-visible + .checkbox-custom {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.checkbox-wrapper:hover .checkbox-custom {
+  border-color: var(--text-secondary);
+}
+
+/* ─── Task Content ─────────────────────────────────── */
+.task-text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: all var(--transition);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.task-date {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  font-weight: 400;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--border-light);
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all var(--transition);
+}
+
+.task-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: rgba(55, 53, 47, 0.08);
+  color: var(--text-primary);
+}
+
+.delete-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ─── Empty State ──────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-tertiary);
+}
+
+.empty-state-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  opacity: 0.3;
+}
+
+.empty-state-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.empty-state-subtext {
+  font-size: 12px;
+  margin-top: 4px;
+  color: var(--text-tertiary);
+}
+
+/* ─── Mobile Header ────────────────────────────────── */
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 90;
+}
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.menu-btn:hover {
+  background: var(--hover-bg);
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.4);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.overlay.active {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 64px 24px 40px;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  .task-input-wrapper {
+    position: sticky;
+    top: 56px;
+    z-index: 50;
+    background: var(--surface);
+  }
+}
+
+/* ─── Reduced motion ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(55, 53, 47, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 53, 47, 0.3);
+}
